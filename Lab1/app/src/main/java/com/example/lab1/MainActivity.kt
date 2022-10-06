@@ -76,7 +76,13 @@ fun card(itemRow: ItemRow){
     shape = RoundedCornerShape(15.dp)
     ) {
         Image(painter = painterResource(id = itemRow.imageId), contentDescription = "marvelCard")
+        Box(modifier= Modifier.fillMaxSize(),
+        Alignment.BottomStart){
+            Text(text=itemRow.title, modifier = Modifier.padding(start = 30.dp, bottom=40.dp),
+                style = TextStyle(color = Color.White,  fontSize = 35.sp))
+        }
     }
+
 
 }
 
