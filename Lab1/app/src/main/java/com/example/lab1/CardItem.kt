@@ -1,5 +1,6 @@
 package com.example.lab1
 
+import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -29,7 +30,8 @@ fun CardItem(itemRow: ItemRow, navController: NavController) {
             .size(320.dp, 440.dp)
             .animateContentSize()
             .clickable {
-                       navController.navigate(Screen.InfoScreen.withArgs(itemRow.imageId.toString()))
+                       navController.navigate(Screen.InfoScreen.withArgs(itemRow.id.toString()))
+                Log.e("deb", itemRow.id.toString())
             },
         shape = RoundedCornerShape(15.dp)
     ) {

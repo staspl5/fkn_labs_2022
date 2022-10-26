@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 
 @Composable
-fun MainScreen(navController : NavController) {
+fun MainScreen(navController : NavController, listCards: List<ItemRow>) {
     Column(
         modifier = Modifier
             .background(Color.DarkGray)
@@ -20,6 +20,6 @@ fun MainScreen(navController : NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Head()
-        Cards(navController)
+        Cards(navController, listCards)
     }
 }
