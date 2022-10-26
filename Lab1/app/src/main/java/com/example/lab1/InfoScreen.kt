@@ -31,7 +31,7 @@ import coil.compose.AsyncImage
 @Composable
 fun InfoScreen(navController: NavController, id: Int?, listCards: List<ItemRow>) {
     //Text(text="Test $id")
-    AsyncImage(model = "https://kinofilmpro.ru/wp-content/uploads/2022/04/2-77.jpeg", contentDescription = null,
+    AsyncImage(model = listCards[id!!].url, contentDescription = null,
     modifier = Modifier.fillMaxSize(),
     contentScale = ContentScale.Crop)
     Box(
@@ -51,14 +51,14 @@ fun InfoScreen(navController: NavController, id: Int?, listCards: List<ItemRow>)
     Box(modifier = Modifier.fillMaxSize(),
     Alignment.BottomStart){
         //Column(modifier = Modifier.background(Color.Black).padding(start = 30.dp, bottom = 35.dp)) {
-        Column(modifier = Modifier.padding(start = 30.dp, bottom = 35.dp)) {
+        Column(modifier = Modifier.padding(start = 30.dp, bottom = 80.dp)) {
             Text(
-                text = listCards[id!!].title, modifier = Modifier.padding(bottom = 20.dp),
-                style = TextStyle(color = Color.White, fontSize = 45.sp)
+                text = listCards[id].title, modifier = Modifier.padding(bottom = 20.dp),
+                style = TextStyle(color = Color.White, fontSize = 53.sp)
             )
             Text(
-                text = listCards[id!!].id.toString(),
-                style = TextStyle(color = Color.White, fontSize = 20.sp)
+                text = listCards[id].description,
+                style = TextStyle(color = Color.White, fontSize = 25.sp)
             )
         }
     }
