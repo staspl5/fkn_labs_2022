@@ -15,18 +15,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 
 @Composable
-fun Cards() {
-    val listCards = listOf(
-        ItemRow(R.drawable.cap, "Captain America", Color(0xFF123EAB)),
-        ItemRow(R.drawable.spider, "Spider-man", Color(0xFFBF9030)),
-        ItemRow(R.drawable.iron, "Iron Man", Color(0xFFD91818)),
-        ItemRow(R.drawable.dead, "Deadpool", Color(0xFF6C0303)),
-        ItemRow(R.drawable.daredevil, "Daredevil", Color(0xFF2A0000)),
-        ItemRow(R.drawable.thanos, "Thanos", Color(0xFF65247F))
-    )
+fun Cards(navController : NavController,  listCards: List<ItemRow>) {
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
     val back = remember {
@@ -52,7 +45,7 @@ fun Cards() {
         .background(color = back.value),
         state = listState) {
         itemsIndexed(listCards) { _, item ->
-            CardItem(item)
+            CardItem(item, navController)
         }
     }
 }

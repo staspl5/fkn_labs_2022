@@ -1,7 +1,9 @@
 package com.example.lab1
 
+import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,14 +20,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun CardItem(itemRow: ItemRow) {
+fun CardItem(itemRow: ItemRow, navController: NavController) {
     Card(
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, top = 20.dp)
             .size(320.dp, 440.dp)
-            .animateContentSize(),
+            .animateContentSize()
+            .clickable {
+                       navController.navigate(Screen.InfoScreen.withArgs(itemRow.id.toString()))
+                Log.e("deb", itemRow.id.toString())
+            },
         shape = RoundedCornerShape(15.dp)
     ) {
         Image(
