@@ -21,6 +21,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Composable
 fun CardItem(itemRow: ItemRow, navController: NavController) {
@@ -32,6 +34,31 @@ fun CardItem(itemRow: ItemRow, navController: NavController) {
             .clickable {
                        navController.navigate(Screen.InfoScreen.withArgs(itemRow.id.toString()))
                 Log.e("deb", itemRow.id.toString())
+                val retrofit = Retrofit.Builder()
+                    .baseUrl(MarvelService.API_URL)
+                    .addConverterFactory(MoshiConverterFactory.create())
+                    .build()
+
+                val service = retrofit.create(MarvelService::class.java)
+
+                val resBody = service.getCharacters("2").execute()
+
+                val res = resBody.body()
+
+                val log1 = res!!.data!!.results[0].id
+
+                val log2 = res.data!!.results[0].name
+
+                val log3 = res.data.results[0].thumbnail!!.path
+
+                Log.e("deb", log1.toString())
+
+                Log.e("deb", log2.toString())
+
+                if (log3 != null) {
+                    Log.e("deb", log3)
+                }
+
             },
         shape = RoundedCornerShape(15.dp)
     ) {
