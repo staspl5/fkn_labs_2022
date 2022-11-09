@@ -21,21 +21,28 @@ fun Navigation() {
         ItemRow(4, R.drawable.daredevil, "Daredevil", Color(0xFF2A0000), "Just blind and lawyer", "https://i.pinimg.com/originals/a9/b7/3a/a9b73a62ecfafe618c0c971fddbf21c3.jpg"),
         ItemRow(5, R.drawable.thanos, "Thanos", Color(0xFF65247F), "I am the inevitability itself", "https://avatars.mds.yandex.net/i?id=3e7d0f80f0d2ded88dca5f21a673baba_l-5602641-images-thumbs&n=13")
     )
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route){
-        composable(route = Screen.MainScreen.route){
-            MainScreen(navController = navController, listCards)
-        }
-        composable(
-            route = Screen.InfoScreen.route + "/{id}",
-            arguments = listOf(
-                navArgument("id"){
-                    type = NavType.IntType
-                }
-            )
-        ){
-            value ->
-            InfoScreen(navController = navController, id = value.arguments?.getInt("id"), listCards)
+    if(listCards[0].title == "Error"){
+        errorMessage()
+    }else {
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
+            composable(route = Screen.MainScreen.route) {
+                MainScreen(navController = navController, listCards)
+            }
+            composable(
+                route = Screen.InfoScreen.route + "/{id}",
+                arguments = listOf(
+                    navArgument("id") {
+                        type = NavType.IntType
+                    }
+                )
+            ) { value ->
+                InfoScreen(
+                    navController = navController,
+                    id = value.arguments?.getInt("id"),
+                    listCards
+                )
+            }
         }
     }
 }
