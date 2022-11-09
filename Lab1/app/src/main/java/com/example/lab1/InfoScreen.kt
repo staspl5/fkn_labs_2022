@@ -17,7 +17,9 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
@@ -51,14 +53,24 @@ fun InfoScreen(navController: NavController, id: Int?, listCards: List<ItemRow>)
     Box(modifier = Modifier.fillMaxSize(),
     Alignment.BottomStart){
         //Column(modifier = Modifier.background(Color.Black).padding(start = 30.dp, bottom = 35.dp)) {
+        val offset = Offset(5.0f, 10.0f)
         Column(modifier = Modifier.padding(start = 30.dp, bottom = 80.dp)) {
             Text(
-                text = listCards[id].title, modifier = Modifier.padding(bottom = 20.dp),
-                style = TextStyle(color = Color.White, fontSize = 53.sp)
+                text = listCards[id].title, modifier = Modifier.padding(bottom = 20.dp, start=15.dp, end= 15.dp),
+                style = TextStyle(color = Color.White, fontSize = 53.sp, shadow = Shadow(
+                    color = Color.Black,
+                    offset = offset,
+                    blurRadius = 3f
+                )
+                )
             )
             Text(
-                text = listCards[id].description,
-                style = TextStyle(color = Color.White, fontSize = 25.sp)
+                text = listCards[id].description, modifier = Modifier.padding(bottom = 20.dp, start=15.dp, end= 15.dp),
+                style = TextStyle(color = Color.White, fontSize = 25.sp, shadow = Shadow(
+                    color = Color.Black,
+                    offset = offset,
+                    blurRadius = 3f
+                ))
             )
         }
     }

@@ -49,6 +49,9 @@ data class Thumbnail(
 
 
 fun getMarvel(): List<ItemRow>{
+    val colors = listOf<Color>(Color.DarkGray, Color.Blue, Color.Cyan, Color.Green, Color.Red,
+        Color.Yellow, Color.LightGray, Color(0xFF123EAB),  Color(0xFFBF9030),
+        Color(0xFFD91818), Color(0xFF6C0303), Color(0xFF2A0000), Color(0xFF65247F))
 
     val retrofit = Retrofit.Builder()
         .baseUrl(MarvelService.API_URL)
@@ -65,31 +68,30 @@ fun getMarvel(): List<ItemRow>{
 
         var k = 0
         res.forEach { item ->
-            if(item.thumbnail!!.path.toString() != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+            if (item.thumbnail!!.path.toString() != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
                 list.add(
                     ItemRow(
                         k,
-                        1,
                         item.name!!,
-                        Color.Blue,
+                        colors.random(),
                         item.description!!,
-                        item.thumbnail!!.path + "/portrait_uncanny." + item.thumbnail.extension
+                        item.thumbnail.path + "/portrait_uncanny." + item.thumbnail.extension
                     )
                 )
                 k++
             }
         }
         Log.i("deb", list.toString())
-    }catch (e: UnknownHostException){
+    } catch (e: UnknownHostException) {
 
-        list.add(ItemRow(0, 0, "Error", Color.Gray, "", ""))
+        list.add(ItemRow(0, "Error", Color.Gray, "", ""))
     }
 
     return list
 }
 
 @Composable
-fun errorMessage(){
+fun ErrorMessage(){
     Text(
         text = "Нет подключения к интернету, не удалось загрузить данные!", modifier = Modifier.padding(start = 30.dp, top = 40.dp),
         style = TextStyle(color = Color.Black, fontSize = 35.sp)
