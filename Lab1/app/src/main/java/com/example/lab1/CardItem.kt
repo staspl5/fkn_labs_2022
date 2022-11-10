@@ -2,7 +2,6 @@ package com.example.lab1
 
 import android.util.Log
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,14 +17,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Composable
 fun CardItem(itemRow: ItemRow, navController: NavController) {
@@ -51,7 +47,7 @@ fun CardItem(itemRow: ItemRow, navController: NavController) {
         ) {
             val offset = Offset(5.0f, 10.0f)
             Text(
-                text = itemRow.title.toString(), modifier = Modifier.padding(start = 30.dp, bottom = 40.dp, end = 30.dp),
+                text = itemRow.title, modifier = Modifier.padding(start = 30.dp, bottom = 40.dp, end = 30.dp),
                 style = TextStyle(color = Color.White, fontSize = 35.sp, shadow = Shadow(
                     color = Color.Black,
                     offset = offset,
